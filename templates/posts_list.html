@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+
+{% block inner_page_title %}Home{% endblock %}
+
+{% block inner_page_content %}
+    {% for post in posts %}
+        <div class="post">
+            <h2 class="post-title"><a href="/post/{{ post.key.id() }}">{{ post.title }}</a></h2>
+            <div class="row post-metadata">
+                <div class="col-md-6">
+                    <p>{{ post.created.strftime("%b %d, %Y") }} / by <a href="/blog/{{ post.user_id }}">{{ post.username }}</a></p>
+                </div>
+                <div class="col-md-6 post-feedb">
+                    <span>{{ post.likes_count }}</span> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    <span>{{ post.comments_count() }}</span> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                </div>
+            </div>
+            <hr>
+            <div class="post-content">
+                <p>{{ post.content | safe }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

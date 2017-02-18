@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="Multiuser Blog Application Project">
+        <meta name="author" content="Yeni Bermudez">
+        <link rel="icon" href="../../favicon.ico">
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Knewave|Roboto" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        {% block title %}
+            <title>{{ page_title }} - Multi User Blog Project</title>
+        {% endblock %}
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="/blog" class="blog-logo">
+                        <h1>Multiuser Blog Application Project</h1>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 blog-error-page">
+                    <p>{{ page_text }}</p>
+                    <p>Go <a href="/blog">Home</a></p>
+                </div>
+            </div>
+        </div>
+        <script src="/js/jquery-3.1.1.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

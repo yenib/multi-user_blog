@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="Multiuser Blog Application Project">
+        <meta name="author" content="Yeni Bermudez">
+        <link rel="icon" href="../../favicon.ico">
+        <!-- Bootstrap core CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Knewave|Roboto" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        {% block title %}
+            <title>{% block page_title %}{% endblock %} - Multi User Blog Project</title>
+        {% endblock %}
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <header class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="/blog" class="blog-logo">
+                        <h1>Multiuser Blog Application Project</h1>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="blog-masthead">
+            <div class="container">
+                <nav class="blog-nav">
+                    <a class="blog-nav-item" href="/blog">Home</a>
+                    <div class="navbar-right">
+                        {% if user %}
+                            <div class="btn-group">
+                                <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span>Hi, {{ user.username }}!</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="user-nav-item" href="#">Edit Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a class="user-nav-item" href="/logout">Logout</a></li>
+                                </ul>
+                            </div>
+                            <a class="user-nav-item" href="/post/new">Create Post</a>
+                            <a class="user-nav-item" href="/blog/{{ user.key.id() }}">My Posts</a>
+                        {% else %}
+                            <a class="user-nav-item" href="/signin">Sign in</a> |
+                            <a class="user-nav-item" href="/signup">Sign up</a>
+                        {% endif %}
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer class="blog-footer">
+            <p>Multiuser Blog Application Project by <a href="#">Yeni Bermudez</a></p>
+            <p></p>
+            <p><a href="#">Back to top</a></p>
+        </footer>
+
+        <script src="/js/jquery-3.1.1.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>

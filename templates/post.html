@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+
+
+{% block inner_page_title %}View Post{% endblock %}
+
+{% block inner_page_content %}
+    <div class="single-post">
+        <h1 class="single-post-title">{{ post.title }}</h1>
+        <div class="row single-post-meta">
+            <div class="col-md-6">
+                <p>{{ post.created.strftime("%b %d, %Y") }} / by <a href="/blog/{{ post.user_id }}">{{ post.username }}</a></p>
+            </div>
+            <div class="col-md-6 single-post-feedb">
+                <span>{{ post.likes_count }}</span> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                {% if post.user_can_like(user) %}
+                    <form class="form-inline" action="/post/{{ post.key.id() }}/like" method="post">
+                        <button type="submit" class="btn-frm btn-frm-go">Like</button>
+                    </form>
+                {% endif %}
+
+                {% if post.user_can_unlike(user) %}
+                    <form class="form-inline" action="/post/{{ post.key.id() }}/unlike" method="post">
+                        <button type="submit" class="btn-frm btn-frm-warn">Unlike</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="post-content">
+            <p>{{ post._render_content | safe }}</p>
+        </div>
+    </div>
+
+    {% if user and user.key.id() == post.user_id %}
+      <div class="single-post-actions">
+          <form action="/post/{{ post.key.id() }}/delete" method="post">
+              <input class="btn-frm btn-frm-warn" type="submit" value="Delete Post"/>
+          </form><!-- TODO: add js "Are you sure" -->
+          <a class="btn-frm btn-frm-go" href="/post/{{ post.key.id() }}/edit">Edit Post</a>
+      </div>
+    {% endif %}
+
+    <div class="single-post-comments">
+        <h3>Total comments: {{ post.comments_count() }}</h3>
+        <form action="/comment/{{post.key.id()}}/new" method="post" class="comment-frm">
+            <textarea name="comment_content" placeholder="Write your comment..."></textarea>
+            <div class="error">{{ error_comment }}</div>
+            <input class="btn-frm btn-frm-go" type="submit" value="Comment">
+        </form>
+
+        {% for comm in post.prep_render_comments() %}
+            <div class="post-comment">
+                <p class="post-comment-writer">{{ comm.username }}</p>
+                <p class="post-comment-date">{{ comm.created.strftime("%b %d, %Y") }}</p>
+                <p class="post-comment-content">{{ comm._render_content | safe }}</p>
+                {% if loop.index == 1 and comm.user_can_edit_delete(user) %}
+                    <div class="post-comment-actions">
+                        <a class="btn-frm btn-frm-go" href="/comment/{{ comm.key.id() }}/edit">Edit Comment</a>
+                        <form action="/comment/{{ comm.key.id() }}/delete" method="post">
+                            <input class="btn-frm btn-frm-warn" type="submit" value="Delete Comment"/>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

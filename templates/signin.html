@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block page_title %}Signup{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <form method="post" action="/signin" class="auth-frm">
+                    <h1>Account login</h1>
+                    <input type="text" name="username" placeholder="enter your username" value="{{ username }}" class="pass">
+                    <input type="password" placeholder="enter your password" name="password" class="pass">
+                    <div class="error">{{ error }}</div>
+                    <input type="submit" value="Sign in" class="btn-frm btn-frm-go"/>
+                </form>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="signin-lnk">
+                    <h1>...or</h1>
+                    <a href="/signup" class="btn-frm btn-frm-go">Create an account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

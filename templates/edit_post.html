@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+
+
+{% block inner_page_title %}Edit Post{% endblock %}
+{% block inner_page_content %}
+    <form method="post" action="/post/{{ pid }}/edit" class="post-frm">
+        <h1>{{ self.inner_page_title() }}</h1>
+        <input type="text" name="subject" value="{{ subject }}" placeholder="Subject" class="pass">
+        <textarea name="content" placeholder="Write your content...">{{ content }}</textarea>
+        <input type="hidden" name="pid" value="{{ pid }}">
+        <div class="error">{{ error }}</div>
+
+        <div class="row">
+            <div class="col-sm-6"><input type="submit" class="btn-frm btn-frm-go" value="Update"></div>
+            <div class="col-sm-6"><a href="/post/{{ pid }}" class="btn-frm btn-frm-warn">Cancel</a></div>
+        </div>
+    </form>
+{% endblock %}

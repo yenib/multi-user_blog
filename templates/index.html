@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}
+    {% block inner_page_title %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 blog-main">
+                {% block inner_page_content %}{% endblock %}
+            </div><!-- /.blog-main -->
+
+            <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+                <div class="blog-sidebar">
+                    {% if user %}
+                        <p>Welcome! Now you can create your own posts, comment and like others.</p>
+                    {% else %}
+                        <p><a href="/signin">Login</a> to create your own posts!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
